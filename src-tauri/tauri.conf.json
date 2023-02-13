@@ -4,10 +4,10 @@
     "beforeBuildCommand": "npm run build",
     "beforeDevCommand": "npm run start",
     "devPath": "http://localhost:4258",
-    "distDir": "../dist"
+    "distDir": "../dist/kiyomics-studio"
   },
   "package": {
-    "productName": "kiyomics-studio",
+    "productName": "Kiyomics Studio",
     "version": "0.1.0"
   },
   "tauri": {
@@ -29,7 +29,7 @@
         "icons/icon.icns",
         "icons/icon.ico"
       ],
-      "identifier": "com.tauri.dev",
+      "identifier": "test.studio.kiyomics",
       "longDescription": "",
       "macOS": {
         "entitlements": null,
@@ -56,10 +56,10 @@
     "windows": [
       {
         "fullscreen": false,
-        "height": 600,
+        "height": 800,
         "resizable": true,
         "title": "Kiyomics Studio",
-        "width": 800
+        "width": 1200
       }
     ]
   }
