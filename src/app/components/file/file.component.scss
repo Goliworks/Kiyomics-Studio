@@ -1,0 +1,17 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+div {
+  width: 60px;
+  height: 60px;
+  background-color: grey;
+}
+
+span {
+  margin-top: 5px;
+  font-size: 13px;
+  color: var(--text-color);
+}
