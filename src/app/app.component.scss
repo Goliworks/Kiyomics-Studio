@@ -6,27 +6,26 @@
   width: 100%;
   grid-template-columns: 20% auto 15%;
   grid-template-rows: auto 250px;
+  grid-gap: 5px;
   grid-template-areas:
     "left middle right"
     "bottom bottom bottom";
+  background-color: var(--surface-ground);
 }
 
 section {
+  background-color: var(--surface-card);
   &.left {
     grid-area: left;
     resize: horizontal;
-    background-color: wheat;
   }
   &.middle {
     grid-area: middle;
-    background-color: burlywood;
   }
   &.right {
     grid-area: right;
-    background-color: bisque;
   }
   &.bottom {
     grid-area: bottom;
-    background-color: cornsilk;
   }
 }
