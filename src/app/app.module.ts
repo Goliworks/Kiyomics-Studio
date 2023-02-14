@@ -5,6 +5,9 @@ import { AppComponent } from './app.component';
 import { FileExplorerComponent } from './components/file-explorer/file-explorer.component';
 import { FileComponent } from './components/file/file.component';
 
+// PrimeNG Modules
+import { TreeTableModule } from 'primeng/treetable';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -12,7 +15,8 @@ import { FileComponent } from './components/file/file.component';
     FileComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    TreeTableModule
   ],
   providers: [],
   bootstrap: [AppComponent]

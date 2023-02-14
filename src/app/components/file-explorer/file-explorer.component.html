@@ -1,8 +1,25 @@
-<app-file />
-<app-file />
-<app-file />
-<app-file />
-<app-file />
-<app-file />
-<app-file />
-<app-file />
+<!--<app-file />-->
+<!--<app-file />-->
+<!--<app-file />-->
+<!--<app-file />-->
+<!--<app-file />-->
+<!--<app-file />-->
+<!--<app-file />-->
+<!--<app-file />-->
+
+<p-treeTable [value]="files">
+  <ng-template pTemplate="header">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Dimensions</th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-rowNode let-rowData="rowData">
+    <tr>
+      <td>{{rowData.name}}</td>
+      <td>{{rowData.type}}</td>
+      <td>{{rowData.dimensions}}</td>
+    </tr>
+  </ng-template>
+</p-treeTable>
