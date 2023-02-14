@@ -15,21 +15,17 @@ export class FileExplorerComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.fileSystemService.getFiles().finally();
-    this.files = [{
-      data: {
-        name: "My file.png",
-        dimensions: "800x600",
-        type: "PNG",
-      }
-    },
-    {
-      data: {
-        name: "another file.jpg",
-        dimensions: "1200x900",
-        type: "JPG",
-      }
-    },]
+    this.fileSystemService.getFiles().then((files) => {
+      this.files = files.map(file => {
+        return {
+          data: {
+            name: file,
+            dimensions: "800x600",
+            type: "PNG",
+          }
+        }
+      })
+    });
   }
 
 }

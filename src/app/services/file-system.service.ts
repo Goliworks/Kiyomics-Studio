@@ -8,9 +8,11 @@ export class FileSystemService {
 
   constructor() {}
 
-  async getFiles() {
-    invoke('get_files').then((s) => {
-      console.log(s);
+  async getFiles(): Promise<string[]> {
+    return new Promise((resolve, reject) => {
+      invoke('get_files').then((s) => {
+        resolve(<string[]>s);
+      });
     });
   }
 }
