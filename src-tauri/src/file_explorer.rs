@@ -27,10 +27,11 @@ pub fn get_files() -> Vec<FileData> {
 fn create_file_data(file: &DirEntry) -> FileData{
   let name = file.file_name().into_string().unwrap();
   let bytes = file.metadata().unwrap().len();
+  let extension = file.path().extension().unwrap().to_str().unwrap().to_uppercase();
   FileData {
     data: FileDataContent {
       name,
-      file_type: "Image".into(),
+      file_type: extension,
       size: bytesToSize(bytes)
     }
   }
