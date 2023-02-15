@@ -1,4 +1,4 @@
-use std::fs::File;
+use std::fs::{DirEntry, File};
 use std::process::Command;
 use std::str;
 use std::path::Path;
@@ -18,20 +18,27 @@ pub fn get_files() -> Vec<FileData> {
   let mut files = vec![];
 
   for entry in path.read_dir().expect("read_idr failed") {
-    let file_name = entry.unwrap().file_name().into_string().unwrap();
-    files.push(create_file_data(file_name));
+    let file = entry.as_ref().unwrap();
+    files.push(create_file_data(file));
   }
   files
 }
 
-fn create_file_data(file_name: String) -> FileData{
+fn create_file_data(file: &DirEntry) -> FileData{
+  let name = file.file_name().into_string().unwrap();
+  let bytes = file.metadata().unwrap().len();
   FileData {
     data: FileDataContent {
-      name: file_name,
+      name,
       file_type: "Image".into(),
-      dimensions: "800x600".into()
+      size: bytesToSize(bytes)
     }
   }
+}
+
+fn bytesToSize(bytes: u64) -> String {
+  let size = (bytes as f64 ) / 1000.0;
+  format!("{} KB", size.round())
 }
 
 #[derive(serde::Serialize)]
@@ -43,5 +50,5 @@ pub struct FileData {
 struct FileDataContent {
   name: String,
   file_type: String,
-  dimensions: String
+  size: String
 }
