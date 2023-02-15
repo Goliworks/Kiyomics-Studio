@@ -1,15 +1,6 @@
-<!--<app-file />-->
-<!--<app-file />-->
-<!--<app-file />-->
-<!--<app-file />-->
-<!--<app-file />-->
-<!--<app-file />-->
-<!--<app-file />-->
-<!--<app-file />-->
+<app-file-explorer-preview [image]="imageUrl"/>
 
-<app-file-explorer-preview />
-
-<p-treeTable [value]="files">
+<p-treeTable [value]="files" selectionMode="single" dataKey="name" [(selection)]="selectedFile" (onNodeSelect)="fileSelection()">
   <ng-template pTemplate="header">
     <tr>
       <th>Name</th>
@@ -18,7 +9,7 @@
     </tr>
   </ng-template>
   <ng-template pTemplate="body" let-rowNode let-rowData="rowData">
-    <tr>
+    <tr [ttSelectableRow]="rowNode">
       <td>{{rowData.name}}</td>
       <td>{{rowData.file_type}}</td>
       <td>{{rowData.size}}</td>

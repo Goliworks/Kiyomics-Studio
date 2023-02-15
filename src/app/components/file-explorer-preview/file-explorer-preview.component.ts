@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import {Component, Input} from '@angular/core';
+import {DomSanitizer} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-file-explorer-preview',
@@ -7,6 +8,13 @@ import { Component } from '@angular/core';
 })
 export class FileExplorerPreviewComponent {
 
-  image = "";
+  @Input() image: string = '';
+
+  constructor(private sanitizer: DomSanitizer) {
+  }
+
+  sanitize(url:string){
+    return this.sanitizer.bypassSecurityTrustUrl(url);
+  }
 
 }

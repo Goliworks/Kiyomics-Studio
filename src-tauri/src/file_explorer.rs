@@ -1,19 +1,11 @@
 use std::fs::{DirEntry, File};
 use std::process::Command;
 use std::str;
-use std::path::Path;
+use std::path::{Path, PathBuf};
 
 #[tauri::command]
 pub fn get_files() -> Vec<FileData> {
-  // Only for Linux and MacOS.
-  let path_cmd = Command::new("sh")
-    .arg("-c")
-    .arg("echo $HOME")
-    .output()
-    .expect("failed to execute process");
-
-  let path = str::from_utf8(&path_cmd.stdout).unwrap().trim();
-  let path = Path::new(&path).join("Documents/ks-test"); // Test
+  let path = generateProjectPath(); // Test
 
   let mut files = vec![];
 
@@ -52,4 +44,17 @@ struct FileDataContent {
   name: String,
   file_type: String,
   size: String
+}
+
+// Temporary. Only for tests.
+pub fn generateProjectPath() -> PathBuf {
+  // Only for Linux and MacOS.
+  let path_cmd = Command::new("sh")
+  .arg("-c")
+  .arg("echo $HOME")
+  .output()
+  .expect("failed to execute process");
+
+  let path = str::from_utf8(&path_cmd.stdout).unwrap().trim();
+  Path::new(&path).join("Documents/ks-test") // Test
 }

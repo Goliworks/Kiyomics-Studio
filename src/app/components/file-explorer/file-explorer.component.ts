@@ -10,14 +10,20 @@ import {FileSystemService} from "../../services/file-system.service";
 export class FileExplorerComponent implements OnInit {
 
   files: TreeNode[] = [];
+  selectedFile: TreeNode | undefined;
 
-  constructor(private fileSystemService: FileSystemService) {
+  imageUrl = ''
+
+  constructor(private fileSystemService: FileSystemService) {}
+
+  fileSelection(){
+    console.log(this.selectedFile);
+    this.imageUrl = `directory://${this.selectedFile?.data?.name}`;
+    console.log(this.imageUrl);
   }
-
   ngOnInit() {
     this.fileSystemService.getFiles().then((files) => {
       this.files = files;
     });
   }
-
 }
