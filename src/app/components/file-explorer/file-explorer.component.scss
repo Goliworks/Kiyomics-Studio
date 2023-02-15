@@ -8,3 +8,12 @@
 tr {
   font-size: 13px;
 }
+
+th {
+  &:nth-child(2){
+    width: 15%;
+  }
+  &:last-child {
+    width: 30%;
+  }
+}
