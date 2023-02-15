@@ -7,12 +7,14 @@ import { FileComponent } from './components/file/file.component';
 
 // PrimeNG Modules
 import { TreeTableModule } from 'primeng/treetable';
+import { FileExplorerPreviewComponent } from './components/file-explorer-preview/file-explorer-preview.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     FileExplorerComponent,
-    FileComponent
+    FileComponent,
+    FileExplorerPreviewComponent
   ],
   imports: [
     BrowserModule,
