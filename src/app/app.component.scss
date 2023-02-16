@@ -15,9 +15,9 @@
 
 section {
   background-color: var(--surface-card);
+  overflow: hidden;
   &.left {
     grid-area: left;
-    resize: horizontal;
   }
   &.middle {
     grid-area: middle;

@@ -1,12 +1,18 @@
 :host {
-  padding: 10px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  :last-child {
+    height: calc(100% - 250px);
+  }
 }
 
 tr {
   font-size: 13px;
 }
 
-th {
+th, td {
   &:nth-child(2){
     width: 15%;
   }

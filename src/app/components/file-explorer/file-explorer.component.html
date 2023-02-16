@@ -1,6 +1,6 @@
 <app-file-explorer-preview [image]="imageUrl"/>
 
-<p-treeTable [value]="files" selectionMode="single" dataKey="name" [(selection)]="selectedFile" (onNodeSelect)="fileSelection()">
+<p-treeTable class="file-explorer-table" [value]="files" [scrollable]="true" scrollHeight="flex" selectionMode="single" dataKey="name" [(selection)]="selectedFile" (onNodeSelect)="fileSelection()">
   <ng-template pTemplate="header">
     <tr>
       <th>Name</th>
@@ -16,3 +16,4 @@
     </tr>
   </ng-template>
 </p-treeTable>
+
