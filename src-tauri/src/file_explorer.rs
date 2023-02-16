@@ -1,6 +1,6 @@
 use std::fs::{DirEntry, File};
 use std::process::Command;
-use std::str;
+use std::{fs, str};
 use std::path::{Path, PathBuf};
 
 #[tauri::command]
@@ -61,5 +61,8 @@ pub fn generateProjectPath() -> PathBuf {
 
 #[tauri::command]
 pub fn add_file(file: String) {
+  let file_name = Path::new(&file).file_name().unwrap().to_str().unwrap();
   println!("File added : {}", file);
+  let a = generateProjectPath().join(file_name);
+  fs::copy(file, a).unwrap();
 }
