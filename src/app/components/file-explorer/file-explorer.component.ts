@@ -14,6 +14,8 @@ export class FileExplorerComponent implements OnInit {
 
   imageUrl = ''
 
+  dragZone = false;
+
   constructor(private fileSystemService: FileSystemService) {}
 
   fileSelection(){
@@ -21,6 +23,17 @@ export class FileExplorerComponent implements OnInit {
     this.imageUrl = `directory://${this.selectedFile?.data?.name}`;
     console.log(this.imageUrl);
   }
+
+  dragEnter() {
+    console.log("enter");
+    this.dragZone = true;
+  }
+
+  dragLeave() {
+    console.log("leave");
+    this.dragZone = false;
+  }
+
   ngOnInit() {
     this.fileSystemService.getFiles().then((files) => {
       this.files = files;

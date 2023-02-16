@@ -1,19 +1,22 @@
 <app-file-explorer-preview [image]="imageUrl"/>
 
-<p-treeTable class="file-explorer-table" [value]="files" [scrollable]="true" scrollHeight="flex" selectionMode="single" dataKey="name" [(selection)]="selectedFile" (onNodeSelect)="fileSelection()">
-  <ng-template pTemplate="header">
-    <tr>
-      <th>Name</th>
-      <th>Type</th>
-      <th>Size</th>
-    </tr>
-  </ng-template>
-  <ng-template pTemplate="body" let-rowNode let-rowData="rowData">
-    <tr [ttSelectableRow]="rowNode">
-      <td>{{rowData.name}}</td>
-      <td>{{rowData.file_type}}</td>
-      <td>{{rowData.size}}</td>
-    </tr>
-  </ng-template>
-</p-treeTable>
-
+<div (dragenter)="dragEnter()">
+  <p-treeTable class="file-explorer-table" [value]="files" [scrollable]="true" scrollHeight="flex" selectionMode="single" dataKey="name" [(selection)]="selectedFile" (onNodeSelect)="fileSelection()">
+    <ng-template pTemplate="header">
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Size</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-rowNode let-rowData="rowData">
+      <tr [ttSelectableRow]="rowNode">
+        <td>{{rowData.name}}</td>
+        <td>{{rowData.file_type}}</td>
+        <td>{{rowData.size}}</td>
+      </tr>
+    </ng-template>
+  </p-treeTable>
+  <div *ngIf="dragZone" class="drop-zone" (dragleave)="dragLeave()">
+  </div>
+</div>
