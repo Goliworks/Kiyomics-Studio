@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {TreeNode} from "primeng/api";
 import {FileSystemService} from "../../services/file-system.service";
 
@@ -14,9 +14,9 @@ export class FileExplorerComponent implements OnInit {
 
   imageUrl = ''
 
-  dragZone = false;
+  constructor(public fileSystemService: FileSystemService, private changeDetectorRef: ChangeDetectorRef) {}
 
-  constructor(private fileSystemService: FileSystemService) {}
+  dragZone = false;
 
   fileSelection(){
     console.log(this.selectedFile);
@@ -26,17 +26,21 @@ export class FileExplorerComponent implements OnInit {
 
   dragEnter() {
     console.log("enter");
-    this.dragZone = true;
+    this.fileSystemService.dragZone.next(true);
   }
 
   dragLeave() {
     console.log("leave");
-    this.dragZone = false;
+    this.fileSystemService.dragZone.next(false);
   }
 
   ngOnInit() {
     this.fileSystemService.getFiles().then((files) => {
       this.files = files;
+    });
+    this.fileSystemService.dragZone.subscribe((v) => {
+      this.dragZone = v;
+      this.changeDetectorRef.detectChanges();
     });
   }
 }
