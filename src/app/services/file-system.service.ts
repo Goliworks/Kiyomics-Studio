@@ -12,7 +12,10 @@ export class FileSystemService {
   dragZone = new BehaviorSubject(false);
 
   constructor() {
-    listen('tauri://file-drop', event => {
+    listen('tauri://file-drop', (event) => {
+      console.log(event);
+      const file = (<any>event).payload[0] as string;
+      this.addFile(file);
       this.dragZone.next(false);
     }).finally();
     listen("tauri://file-drop-cancelled", event => {
@@ -25,6 +28,12 @@ export class FileSystemService {
       invoke('get_files').then((s) => {
         resolve(<TreeNode[]>s);
       });
+    });
+  }
+
+  addFile(file: string) {
+    invoke('add_file', { file }).then(() => {
+      console.log('File added')
     });
   }
 }

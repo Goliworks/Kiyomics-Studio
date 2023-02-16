@@ -58,3 +58,8 @@ pub fn generateProjectPath() -> PathBuf {
   let path = str::from_utf8(&path_cmd.stdout).unwrap().trim();
   Path::new(&path).join("Documents/ks-test") // Test
 }
+
+#[tauri::command]
+pub fn add_file(file: String) {
+  println!("File added : {}", file);
+}

@@ -9,12 +9,12 @@ use std::error::Error;
 use std::fs::read;
 use std::path::Path;
 use tauri::http::{Request, Response, ResponseBuilder};
-use file_explorer::get_files;
+use file_explorer::{get_files, add_file};
 use crate::file_explorer::generateProjectPath;
 
 fn main() {
   tauri::Builder::default()
-    .invoke_handler(tauri::generate_handler![get_files])
+    .invoke_handler(tauri::generate_handler![get_files, add_file])
     // Get project directory file from custom URL.
     .register_uri_scheme_protocol("directory", move |_, request| {
       getFile(request)
