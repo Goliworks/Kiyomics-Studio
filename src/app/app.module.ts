@@ -9,6 +9,8 @@ import { FileComponent } from './components/file/file.component';
 import { TreeTableModule } from 'primeng/treetable';
 import { FileExplorerPreviewComponent } from './components/file-explorer-preview/file-explorer-preview.component';
 
+import { NgxsModule } from '@ngxs/store';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -17,6 +19,9 @@ import { FileExplorerPreviewComponent } from './components/file-explorer-preview
     FileExplorerPreviewComponent
   ],
   imports: [
+    NgxsModule.forRoot([], {
+      developmentMode: true
+    }),
     BrowserModule,
     TreeTableModule
   ],
