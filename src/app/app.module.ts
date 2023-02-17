@@ -10,6 +10,7 @@ import { TreeTableModule } from 'primeng/treetable';
 import { FileExplorerPreviewComponent } from './components/file-explorer-preview/file-explorer-preview.component';
 
 import { NgxsModule } from '@ngxs/store';
+import { FileExplorerState } from "./store/file-explorer.state";
 
 @NgModule({
   declarations: [
@@ -19,7 +20,7 @@ import { NgxsModule } from '@ngxs/store';
     FileExplorerPreviewComponent
   ],
   imports: [
-    NgxsModule.forRoot([], {
+    NgxsModule.forRoot([FileExplorerState], {
       developmentMode: true
     }),
     BrowserModule,
