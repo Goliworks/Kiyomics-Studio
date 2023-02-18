@@ -34,5 +34,4 @@ export class FileExplorerState {
     // const state = ctx.getState();
     ctx.setState(result);
   }
-
 }

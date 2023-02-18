@@ -18,11 +18,11 @@ export class DragAndDropService {
 
   private initTauriFileDrop(){
     listen('tauri://file-drop', (event) => {
-      console.log(event);
-      const file = (<any>event).payload[0] as string;
-      // this.addFile(file);
-      this.store.dispatch(new AddFile(file));
-      this.dragZone.next(false);
+      if(this.dragZone.value) {
+        const file = (<any>event).payload[0] as string;
+        this.store.dispatch(new AddFile(file));
+        this.dragZone.next(false);
+      }
     }).finally();
   }
 
