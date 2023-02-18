@@ -1,4 +1,4 @@
 <div>
-  <img *ngIf="image; else elseBlock"  [src]="sanitize(image)" />
+  <img *ngIf="image; else elseBlock" [src]="sanitize(image)" />
   <ng-template #elseBlock><span>No file selected</span></ng-template>
 </div>

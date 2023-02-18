@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import {Action, State, StateContext} from '@ngxs/store';
-import {TreeNode} from "primeng/api";
-import {FileSystemService} from "../services/file-system.service";
+import { Action, State, StateContext } from '@ngxs/store';
+import { TreeNode } from 'primeng/api';
+import { FileSystemService } from '../services/file-system.service';
 
 export class UpdateTree {
   static readonly type = '[FileExplorer] UpdateTree';
@@ -15,12 +15,11 @@ export class AddFile {
 
 @State<TreeNode[]>({
   name: 'fileExplorer',
-  defaults: []
+  defaults: [],
 })
 @Injectable()
 export class FileExplorerState {
-  constructor(private fileSystemService: FileSystemService) {
-  }
+  constructor(private fileSystemService: FileSystemService) {}
   @Action(UpdateTree)
   async updateTree(ctx: StateContext<TreeNode[]>, action: UpdateTree) {
     const result = await this.fileSystemService.getFiles();
