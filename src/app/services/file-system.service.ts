@@ -9,20 +9,6 @@ import {BehaviorSubject, Subject} from "rxjs";
 })
 export class FileSystemService {
 
-  dragZone = new BehaviorSubject(false);
-
-  constructor() {
-    listen('tauri://file-drop', (event) => {
-      console.log(event);
-      const file = (<any>event).payload[0] as string;
-      this.addFile(file);
-      this.dragZone.next(false);
-    }).finally();
-    listen("tauri://file-drop-cancelled", event => {
-      this.dragZone.next(false);
-    }).finally();
-  }
-
   async getFiles(): Promise<TreeNode[]> {
     return new Promise((resolve, reject) => {
       invoke('get_files').then((s) => {

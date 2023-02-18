@@ -4,6 +4,7 @@ import {FileSystemService} from "../../services/file-system.service";
 import {Select, Store} from "@ngxs/store";
 import {Observable} from "rxjs";
 import {FileExplorerState, UpdateTree} from "../../store/file-explorer.state";
+import {DragAndDropService} from "../../services/drag-and-drop.service";
 
 @Component({
   selector: 'app-file-explorer',
@@ -18,7 +19,11 @@ export class FileExplorerComponent implements OnInit {
 
   imageUrl = ''
 
-  constructor(public fileSystemService: FileSystemService, private changeDetectorRef: ChangeDetectorRef, private store: Store) {}
+  constructor(
+    private fileSystemService: FileSystemService,
+    public dranAndDropService: DragAndDropService,
+    private changeDetectorRef: ChangeDetectorRef,
+    private store: Store) {}
 
   dragZone = false;
 
@@ -30,12 +35,12 @@ export class FileExplorerComponent implements OnInit {
 
   dragEnter() {
     console.log("enter");
-    this.fileSystemService.dragZone.next(true);
+    this.dranAndDropService.dragZone.next(true);
   }
 
   dragLeave() {
     console.log("leave");
-    this.fileSystemService.dragZone.next(false);
+    this.dranAndDropService.dragZone.next(false);
   }
 
   ngOnInit() {
@@ -45,7 +50,7 @@ export class FileExplorerComponent implements OnInit {
       this.files = tree.map(item =>  ({...item})); // copy items
     });
 
-    this.fileSystemService.dragZone.subscribe((v) => {
+    this.dranAndDropService.dragZone.subscribe((v) => {
       this.dragZone = v;
       this.changeDetectorRef.detectChanges();
     });
