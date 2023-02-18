@@ -60,9 +60,11 @@ pub fn generateProjectPath() -> PathBuf {
 }
 
 #[tauri::command]
-pub fn add_file(file: String) {
+pub fn add_file(file: String) -> Vec<FileData> {
   let file_name = Path::new(&file).file_name().unwrap().to_str().unwrap();
   println!("File added : {}", file);
   let a = generateProjectPath().join(file_name);
   fs::copy(file, a).unwrap();
+  // Return directory content.
+  get_files()
 }

@@ -11,15 +11,18 @@ export class FileSystemService {
 
   async getFiles(): Promise<TreeNode[]> {
     return new Promise((resolve, reject) => {
-      invoke('get_files').then((s) => {
-        resolve(<TreeNode[]>s);
+      invoke('get_files').then((files) => {
+        resolve(<TreeNode[]>files);
       });
     });
   }
 
-  addFile(file: string) {
-    invoke('add_file', { file }).then(() => {
-      console.log('File added')
+  async addFile(file: string): Promise<TreeNode[]> {
+    return new Promise((resolve) => {
+      invoke('add_file', { file }).then((files) => {
+        console.log('File added')
+        resolve(<TreeNode[]>files)
+      });
     });
   }
 }

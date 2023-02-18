@@ -8,6 +8,11 @@ export class UpdateTree {
   constructor() {}
 }
 
+export class AddFile {
+  static readonly type = '[FileExplorer] AddFile';
+  constructor(public file: string) {}
+}
+
 @State<TreeNode[]>({
   name: 'fileExplorer',
   defaults: []
@@ -22,4 +27,12 @@ export class FileExplorerState {
     // const state = ctx.getState();
     ctx.setState(result);
   }
+
+  @Action(AddFile)
+  async addFile(ctx: StateContext<TreeNode[]>, action: AddFile) {
+    const result = await this.fileSystemService.addFile(action.file);
+    // const state = ctx.getState();
+    ctx.setState(result);
+  }
+
 }
