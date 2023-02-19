@@ -4,31 +4,31 @@
 )]
 
 mod file_explorer;
+mod utils;
 
 use std::error::Error;
 use std::fs::read;
-use std::path::Path;
 use tauri::http::{Request, Response, ResponseBuilder};
 use file_explorer::{get_files, add_file};
-use crate::file_explorer::generateProjectPath;
+use crate::utils::generate_project_path;
 
 fn main() {
   tauri::Builder::default()
     .invoke_handler(tauri::generate_handler![get_files, add_file])
     // Get project directory file from custom URL.
     .register_uri_scheme_protocol("directory", move |_, request| {
-      getFile(request)
+      get_file(request)
     })
     // end
     .run(tauri::generate_context!())
     .expect("error while running tauri application");
 }
 
-fn getFile(request: &Request) -> Result<Response, Box<dyn Error>> {
+fn get_file(request: &Request) -> Result<Response, Box<dyn Error>> {
   let mut path = request.uri().replace("directory://", "");
   // Remove the last "/" of the url.
   path.pop();
-  let path = generateProjectPath().as_path().join(path);
+  let path = generate_project_path().as_path().join(path);
   let extension = path.extension().unwrap().to_str().unwrap().to_string();
   let res_not_img = ResponseBuilder::new()
     .status(404)

@@ -1,13 +1,13 @@
-use std::fs::{DirEntry, File};
-use std::process::Command;
+use std::fs::{DirEntry};
 use std::{fs, str};
-use std::path::{Path, PathBuf};
+use std::path::{Path};
+use crate::utils::{bytes_to_size, generate_project_path};
 
 static AUTHORIZED_FILES: &[&str] = &["jpg","jpeg","png", "gif"];
 
 #[tauri::command]
 pub fn get_files() -> Vec<FileData> {
-  let path = generateProjectPath(); // Test
+  let path = generate_project_path(); // Test
 
   let mut files = vec![];
 
@@ -36,16 +36,11 @@ fn create_file_data(file: &DirEntry, files: &mut Vec<FileData>){
         data: FileDataContent {
           name: file.file_name().into_string().unwrap(),
           file_type: extension.to_uppercase(),
-          size: bytesToSize(bytes)
+          size: bytes_to_size(bytes)
         }
       });
     }
   }
-}
-
-fn bytesToSize(bytes: u64) -> String {
-  let size = (bytes as f64 ) / 1000.0;
-  format!("{} KB", size.round())
 }
 
 #[derive(serde::Serialize)]
@@ -60,25 +55,13 @@ struct FileDataContent {
   size: String
 }
 
-// Temporary. Only for tests.
-pub fn generateProjectPath() -> PathBuf {
-  // Only for Linux and MacOS.
-  let path_cmd = Command::new("sh")
-  .arg("-c")
-  .arg("echo $HOME")
-  .output()
-  .expect("failed to execute process");
-
-  let path = str::from_utf8(&path_cmd.stdout).unwrap().trim();
-  Path::new(&path).join("Documents/ks-test") // Test
-}
 
 #[tauri::command]
 pub fn add_file(file: String) -> Vec<FileData> {
   let file_name = Path::new(&file).file_name().unwrap().to_str().unwrap();
   println!("File added : {}", file);
-  let a = generateProjectPath().join(file_name);
-  fs::copy(file, a).unwrap();
+  let file_destination = generate_project_path().join(file_name);
+  fs::copy(file, file_destination).unwrap();
   // Return directory content.
   get_files()
 }
