@@ -3,6 +3,8 @@ use std::process::Command;
 use std::{fs, str};
 use std::path::{Path, PathBuf};
 
+static AUTHORIZED_FILES: &[&str] = &["jpg","jpeg","png", "gif"];
+
 #[tauri::command]
 pub fn get_files() -> Vec<FileData> {
   let path = generateProjectPath(); // Test
@@ -11,20 +13,32 @@ pub fn get_files() -> Vec<FileData> {
 
   for entry in path.read_dir().expect("read_idr failed") {
     let file = entry.as_ref().unwrap();
-    files.push(create_file_data(file));
+    create_file_data(file, &mut files);
   }
   files
 }
 
-fn create_file_data(file: &DirEntry) -> FileData{
-  let name = file.file_name().into_string().unwrap();
-  let bytes = file.metadata().unwrap().len();
-  let extension = file.path().extension().unwrap().to_str().unwrap().to_uppercase();
-  FileData {
-    data: FileDataContent {
-      name,
-      file_type: extension,
-      size: bytesToSize(bytes)
+fn create_file_data(file: &DirEntry, files: &mut Vec<FileData>){
+  // Add file only if it's an authorized file or a folder.
+  if file.path().is_dir() {
+    files.push(FileData {
+      data: FileDataContent {
+        name: file.file_name().into_string().unwrap(),
+        file_type: String::from("FOLDER"),
+        size: String::from("--")
+      }
+    });
+  } else {
+    let extension = file.path().extension().unwrap().to_str().unwrap().to_string();
+    if AUTHORIZED_FILES.contains(&extension.as_str()) {
+      let bytes = file.metadata().unwrap().len();
+      files.push(FileData {
+        data: FileDataContent {
+          name: file.file_name().into_string().unwrap(),
+          file_type: extension.to_uppercase(),
+          size: bytesToSize(bytes)
+        }
+      });
     }
   }
 }
