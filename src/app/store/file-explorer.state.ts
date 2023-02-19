@@ -6,12 +6,16 @@ import { Tree } from 'primeng/tree';
 
 export class UpdateTree {
   static readonly type = '[FileExplorer] UpdateTree';
-  constructor() {}
 }
 
 export class AddFile {
   static readonly type = '[FileExplorer] AddFile';
   constructor(public file: string) {}
+}
+
+export class ChangeDir {
+  static readonly type = '[FileExplorer] ChangeDir';
+  constructor(public directory: string) {}
 }
 
 export interface FileExplorerModel {
@@ -29,23 +33,36 @@ export interface FileExplorerModel {
 @Injectable()
 export class FileExplorerState {
   constructor(private fileSystemService: FileSystemService) {}
+
   @Selector()
   static treeFiles(state: FileExplorerModel) {
     return state.treeFiles;
   }
+
   @Action(UpdateTree)
   async updateTree(ctx: StateContext<FileExplorerModel>, action: UpdateTree) {
     const result = await this.fileSystemService.getFiles();
-    // const state = ctx.getState();
     ctx.patchState({
       treeFiles: result,
     });
   }
 
   @Action(AddFile)
-  async addFile(ctx: StateContext<TreeNode[]>, action: AddFile) {
+  async addFile(ctx: StateContext<FileExplorerModel>, action: AddFile) {
     const result = await this.fileSystemService.addFile(action.file);
-    // const state = ctx.getState();
-    ctx.setState(result);
+    ctx.patchState({
+      treeFiles: result,
+    });
+  }
+
+  @Action(ChangeDir)
+  async changeDir(ctx: StateContext<FileExplorerModel>, action: ChangeDir) {
+    const currentDir = ctx.getState().currentDir;
+    const newDir = `${currentDir}/${action.directory}`;
+    const result = await this.fileSystemService.getFiles(newDir);
+    ctx.patchState({
+      currentDir: newDir,
+      treeFiles: result,
+    });
   }
 }

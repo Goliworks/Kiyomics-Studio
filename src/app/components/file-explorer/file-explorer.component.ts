@@ -3,7 +3,11 @@ import { TreeNode } from 'primeng/api';
 import { FileSystemService } from '../../services/file-system.service';
 import { Select, Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
-import { FileExplorerState, UpdateTree } from '../../store/file-explorer.state';
+import {
+  ChangeDir,
+  FileExplorerState,
+  UpdateTree,
+} from '../../store/file-explorer.state';
 import { DragAndDropService } from '../../services/drag-and-drop.service';
 
 @Component({
@@ -44,6 +48,7 @@ export class FileExplorerComponent implements OnInit {
       console.log(this.imageUrl);
     } else {
       this.imageUrl = '';
+      this.store.dispatch(new ChangeDir(this.selectedFile?.data?.name));
     }
   }
 

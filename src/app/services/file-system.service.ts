@@ -8,9 +8,9 @@ import { BehaviorSubject, Subject } from 'rxjs';
   providedIn: 'root',
 })
 export class FileSystemService {
-  async getFiles(): Promise<TreeNode[]> {
+  async getFiles(path = ''): Promise<TreeNode[]> {
     return new Promise((resolve, reject) => {
-      invoke('get_files').then(files => {
+      invoke('get_files', { path }).then(files => {
         resolve(<TreeNode[]>files);
       });
     });

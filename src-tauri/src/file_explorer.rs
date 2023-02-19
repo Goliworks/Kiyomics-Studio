@@ -6,12 +6,20 @@ use crate::utils::{bytes_to_size, generate_project_path};
 static AUTHORIZED_FILES: &[&str] = &["jpg","jpeg","png", "gif"];
 
 #[tauri::command]
-pub fn get_files() -> Vec<FileData> {
-  let path = generate_project_path(); // Test
+pub fn get_files(path: Option<String>) -> Vec<FileData> {
+  let mut project_path = generate_project_path(); // Test
+
+  if path.is_some() {
+    let path = path.unwrap();
+    let dirs = path.split('/');
+    for dir in dirs {
+      project_path.push(dir);
+    }
+  }
 
   let mut files = vec![];
 
-  for entry in path.read_dir().expect("read_idr failed") {
+  for entry in project_path.read_dir().expect("read_idr failed") {
     let file = entry.as_ref().unwrap();
     create_file_data(file, &mut files);
   }
@@ -30,7 +38,6 @@ fn create_file_data(file: &DirEntry, files: &mut Vec<FileData>){
       }
     });
   } else if name != ".DS_Store" { // Avoid MacOS hidden file.
-    println!("{}", file.file_name().into_string().unwrap());
     let extension = file.path().extension().unwrap().to_str().unwrap().to_string();
     if AUTHORIZED_FILES.contains(&extension.as_str()) {
       let bytes = file.metadata().unwrap().len();
@@ -65,5 +72,5 @@ pub fn add_file(file: String) -> Vec<FileData> {
   let file_destination = generate_project_path().join(file_name);
   fs::copy(file, file_destination).unwrap();
   // Return directory content.
-  get_files()
+  get_files(None)
 }
