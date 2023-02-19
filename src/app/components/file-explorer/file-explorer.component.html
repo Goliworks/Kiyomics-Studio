@@ -19,7 +19,10 @@
     </ng-template>
     <ng-template pTemplate="body" let-rowNode let-rowData="rowData">
       <tr [ttSelectableRow]="rowNode">
-        <td>{{ rowData.name }}</td>
+        <td>
+          <i class="pi" [ngClass]="fileIcons[rowData.file_type]"></i
+          >{{ rowData.name }}
+        </td>
         <td>{{ rowData.file_type }}</td>
         <td>{{ rowData.size }}</td>
       </tr>

@@ -33,7 +33,8 @@
               "src/styles.scss",
               "src/theme.scss",
               "node_modules/primeng/resources/themes/arya-orange/theme.css",
-              "node_modules/primeng/resources/primeng.min.css"
+              "node_modules/primeng/resources/primeng.min.css",
+              "node_modules/primeicons/primeicons.css"
             ],
             "scripts": []
           },

@@ -18,6 +18,14 @@ export class FileExplorerComponent implements OnInit {
 
   imageUrl = '';
 
+  fileIcons: { [key: string]: string } = {
+    FOLDER: 'pi-folder',
+    JPG: 'pi-image',
+    JPEG: 'pi-image',
+    PNG: 'pi-image png-color',
+    GIF: 'pi-images',
+  };
+
   constructor(
     private fileSystemService: FileSystemService,
     public dranAndDropService: DragAndDropService,

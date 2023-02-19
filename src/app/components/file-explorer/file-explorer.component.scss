@@ -33,4 +33,19 @@ td {
   &:last-child {
     width: 30%;
   }
+  i {
+    padding-right: 10px;
+    &.pi-folder {
+      color: var(--yellow-500);
+    }
+    &.pi-image {
+      color: var(--teal-400);
+      &.png-color {
+        color: var(--indigo-400);
+      }
+    }
+    &.pi-images {
+      color: var(--green-300);
+    }
+  }
 }
