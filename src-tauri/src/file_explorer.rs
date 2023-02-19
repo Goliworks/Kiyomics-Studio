@@ -20,21 +20,23 @@ pub fn get_files() -> Vec<FileData> {
 
 fn create_file_data(file: &DirEntry, files: &mut Vec<FileData>){
   // Add file only if it's an authorized file or a folder.
+  let name = file.file_name().into_string().unwrap();
   if file.path().is_dir() {
     files.push(FileData {
       data: FileDataContent {
-        name: file.file_name().into_string().unwrap(),
+        name,
         file_type: String::from("FOLDER"),
         size: String::from("--")
       }
     });
-  } else {
+  } else if name != ".DS_Store" { // Avoid MacOS hidden file.
+    println!("{}", file.file_name().into_string().unwrap());
     let extension = file.path().extension().unwrap().to_str().unwrap().to_string();
     if AUTHORIZED_FILES.contains(&extension.as_str()) {
       let bytes = file.metadata().unwrap().len();
       files.push(FileData {
         data: FileDataContent {
-          name: file.file_name().into_string().unwrap(),
+          name,
           file_type: extension.to_uppercase(),
           size: bytes_to_size(bytes)
         }
