@@ -13,7 +13,9 @@ import { DragAndDropService } from '../../services/drag-and-drop.service';
 })
 export class FileExplorerComponent implements OnInit {
   files: TreeNode[] = [];
-  @Select(FileExplorerState) files$: Observable<TreeNode[]> | undefined;
+  @Select(FileExplorerState.treeFiles) files$:
+    | Observable<TreeNode[]>
+    | undefined;
   selectedFile: TreeNode | undefined;
 
   imageUrl = '';
@@ -37,8 +39,12 @@ export class FileExplorerComponent implements OnInit {
 
   fileSelection() {
     console.log(this.selectedFile);
-    this.imageUrl = `directory://${this.selectedFile?.data?.name}`;
-    console.log(this.imageUrl);
+    if (this.selectedFile?.data.file_type !== 'FOLDER') {
+      this.imageUrl = `directory://${this.selectedFile?.data?.name}`;
+      console.log(this.imageUrl);
+    } else {
+      this.imageUrl = '';
+    }
   }
 
   dragEnter() {
