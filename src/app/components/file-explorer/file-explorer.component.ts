@@ -44,7 +44,8 @@ export class FileExplorerComponent implements OnInit {
   fileSelection() {
     console.log(this.selectedFile);
     if (this.selectedFile?.data.file_type !== 'FOLDER') {
-      this.imageUrl = `directory://${this.selectedFile?.data?.name}`;
+      const file = this.selectedFile?.data?.name.replace(' ', '&spc;'); // Replace spaces with custom code. (%20 don't works).
+      this.imageUrl = `directory://${file}`;
       console.log(this.imageUrl);
     } else {
       this.imageUrl = '';

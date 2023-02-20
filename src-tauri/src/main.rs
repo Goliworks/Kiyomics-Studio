@@ -25,7 +25,9 @@ fn main() {
 }
 
 fn get_file(request: &Request) -> Result<Response, Box<dyn Error>> {
-  let mut path = request.uri().replace("directory://", "");
+  let path = request.uri().replace("directory://", "");
+  // Transform spaces.
+  let mut path = path.replace("&spc;", " ");
   // Remove the last "/" of the url.
   path.pop();
   let path = generate_project_path().as_path().join(path);
