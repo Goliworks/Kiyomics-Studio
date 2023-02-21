@@ -8,7 +8,7 @@ import {
   FileExplorerState,
   UpdateTree,
 } from '../../store/file-explorer.state';
-import { DragAndDropService } from '../../services/drag-and-drop.service';
+import { DragAndDropService } from '../../../../services/drag-and-drop.service';
 
 @Component({
   selector: 'app-file-explorer',

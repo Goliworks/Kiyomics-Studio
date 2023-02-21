@@ -3,6 +3,7 @@ import { invoke } from '@tauri-apps/api/tauri';
 import { TreeNode } from 'primeng/api';
 import { listen } from '@tauri-apps/api/event';
 import { BehaviorSubject, Subject } from 'rxjs';
+import { FileExplorerModule } from '../file-explorer.module';
 
 @Injectable({
   providedIn: 'root',
