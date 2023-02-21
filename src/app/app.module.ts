@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { FileExplorerModule } from './features/file-explorer/file-explorer.module';
 import { NgxsModule } from '@ngxs/store';
-import { FileExplorerState } from './features/file-explorer/store/file-explorer.state';
+import { CoreModule } from './core/core.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -10,6 +10,7 @@ import { FileExplorerState } from './features/file-explorer/store/file-explorer.
     NgxsModule.forRoot([], {
       developmentMode: true,
     }),
+    CoreModule,
     FileExplorerModule,
   ],
   bootstrap: [AppComponent],

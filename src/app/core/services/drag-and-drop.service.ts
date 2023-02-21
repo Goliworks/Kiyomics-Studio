@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { listen } from '@tauri-apps/api/event';
 import { BehaviorSubject } from 'rxjs';
 import { Store } from '@ngxs/store';
-import { AddFile } from '../features/file-explorer/store/file-explorer.state';
+import { AddFile } from '../../features/file-explorer/store/file-explorer.state';
 
 @Injectable({
   providedIn: 'root',
