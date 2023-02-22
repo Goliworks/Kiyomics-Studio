@@ -1,4 +1,9 @@
 :host {
+  height: 100%;
+  width: 100%;
+}
+
+div.app-container {
   position: absolute;
   display: grid;
   grid-template-rows: auto;

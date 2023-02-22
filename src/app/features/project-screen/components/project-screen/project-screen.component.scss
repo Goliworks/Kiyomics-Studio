@@ -1,0 +1,44 @@
+div.content {
+  padding: 20px;
+  > h1 {
+    text-align: center;
+    font-weight: normal;
+    color: var(--gray-400);
+  }
+  > .buttons {
+    display: flex;
+    padding-top: 25px;
+    justify-content: space-evenly;
+    > button {
+      display: flex;
+      flex-direction: column;
+      padding: 0;
+      border: none;
+      background-color: transparent;
+      align-items: center;
+      &:hover {
+        cursor: pointer;
+        i {
+          background-color: rgba(255, 255, 255, 0.05);
+        }
+      }
+      i {
+        border: 1px solid var(--gray-500);
+        width: 100px;
+        height: 100px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 3px;
+        font-size: 20px;
+        color: var(--gray-300);
+        transition: background-color 200ms;
+      }
+      span {
+        margin-top: 15px;
+        font-size: 14px;
+        color: var(--gray-300);
+      }
+    }
+  }
+}

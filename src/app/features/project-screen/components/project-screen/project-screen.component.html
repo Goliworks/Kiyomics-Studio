@@ -1,1 +1,18 @@
-<p>project-screen works!</p>
+<p-dialog
+  [(visible)]="display"
+  [modal]="true"
+  [draggable]="false"
+  [resizable]="false"
+  [closable]="false"
+  [showHeader]="false"
+  [style]="{ width: '600px' }">
+  <div class="content">
+    <h1>Kiyomics Studio</h1>
+    <div class="buttons">
+      <button><i class="pi pi-plus"></i><span>New project</span></button>
+      <button>
+        <i class="pi pi-folder-open"></i><span>Open project</span>
+      </button>
+    </div>
+  </div>
+</p-dialog>
