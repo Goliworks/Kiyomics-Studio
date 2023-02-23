@@ -46,14 +46,14 @@ input {
 
 label {
   color: var(--gray-300);
-  font-size: 14px
+  font-size: 14px;
 }
 
 label:not(.size-fields) {
   display: block;
-  margin-bottom:8px;
+  margin-bottom: 8px;
 }
 
 p-dropdown {
-  width:65%;
+  width: 65%;
 }
