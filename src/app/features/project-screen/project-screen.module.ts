@@ -4,9 +4,10 @@ import { ProjectScreenComponent } from './components/project-screen/project-scre
 import { DialogModule } from 'primeng/dialog';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CarouselModule } from 'primeng/carousel';
+import { NewProjectScreenComponent } from './components/new-project-screen/new-project-screen.component';
 
 @NgModule({
-  declarations: [ProjectScreenComponent],
+  declarations: [ProjectScreenComponent, NewProjectScreenComponent],
   imports: [
     CommonModule,
     BrowserAnimationsModule,
