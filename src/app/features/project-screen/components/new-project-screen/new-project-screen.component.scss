@@ -1,0 +1,59 @@
+:host {
+  height: 100%;
+  width: 100%;
+}
+
+h3 {
+  font-weight: normal;
+  color: var(--gray-400);
+}
+
+form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  flex-direction: column;
+  gap: 20px;
+}
+
+span.project-field {
+  width: 65%;
+}
+
+input {
+  width: 100%;
+}
+
+.bottom-buttons {
+  margin-top: 20px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.size-fields {
+  width: 65%;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  align-items: center;
+  gap: 20px;
+  label {
+    margin-bottom: 0;
+  }
+}
+
+label {
+  color: var(--gray-300);
+  font-size: 14px
+}
+
+label:not(.size-fields) {
+  display: block;
+  margin-bottom:8px;
+}
+
+p-dropdown {
+  width:65%;
+}

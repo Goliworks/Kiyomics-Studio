@@ -8,5 +8,5 @@ import { Component } from '@angular/core';
 export class ProjectScreenComponent {
   display = true;
   screens = ['firstScreen', 'SecondScreen'];
-  page = 0;
+  page = 1;
 }

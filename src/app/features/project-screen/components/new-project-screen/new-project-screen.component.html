@@ -1,1 +1,51 @@
-<p>new-project-screen works!</p>
+<form [formGroup]="projectForm">
+  <h3>New project</h3>
+  <span class="project-field">
+    <label>Project name</label>
+    <input type="text" pInputText formControlName="name" />
+  </span>
+
+  <span>
+    <label>Project location</label>
+    <span class="p-inputgroup">
+      <button
+        type="button"
+        pButton
+        label="Select location"
+        class="p-button-success"></button>
+      <input type="text" pInputText placeholder="Project path" />
+    </span>
+  </span>
+
+  <span class="project-field">
+    <label>Format</label>
+    <p-dropdown
+      [options]="projectFormat"
+      optionLabel="name"
+      [style]="{ width: '100%' }"
+      formControlName="format"></p-dropdown>
+  </span>
+
+  <div class="size-fields">
+    <label>Width</label
+    ><p-inputNumber
+      formControlName="width"
+      [inputStyle]="{ width: '100px' }"
+      suffix="px"></p-inputNumber>
+    <label>Height</label
+    ><p-inputNumber
+      formControlName="height"
+      [inputStyle]="{ width: '100px' }"
+      suffix="px"></p-inputNumber>
+  </div>
+
+  <div class="bottom-buttons">
+    <button
+      pButton
+      type="button"
+      label="Cancel"
+      class="p-button-outlined p-button-secondary"></button>
+
+    <button pButton type="button" label="Create project"></button>
+  </div>
+</form>
