@@ -6,13 +6,35 @@
   [closable]="false"
   [showHeader]="false"
   [style]="{ width: '600px' }">
+  <p-carousel
+    [value]="screens"
+    [page]="page"
+    [showNavigators]="false"
+    [showIndicators]="false">
+    <ng-template let-screen pTemplate="item">
+      <ng-container
+        *ngTemplateOutlet="
+          screen === 'firstScreen' ? firstScreen : secondScreen
+        "></ng-container>
+    </ng-template>
+  </p-carousel>
+</p-dialog>
+
+<ng-template #firstScreen>
   <div class="content">
     <h1>Kiyomics Studio</h1>
     <div class="buttons">
-      <button><i class="pi pi-plus"></i><span>New project</span></button>
+      <button (click)="page = 1">
+        <i class="pi pi-plus"></i><span>New project</span>
+      </button>
       <button>
         <i class="pi pi-folder-open"></i><span>Open project</span>
       </button>
     </div>
   </div>
-</p-dialog>
+</ng-template>
+
+<ng-template #secondScreen>
+  <div class="content">Second screen</div>
+  <button (click)="page = 0">Back</button>
+</ng-template>
