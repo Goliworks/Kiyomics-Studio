@@ -30,6 +30,10 @@ export class NewProjectScreenComponent implements OnInit {
     this.projectForm.get('format')?.patchValue(this.projectFormat[2]); // Change format field to "Custom".
   }
 
+  createProject() {
+    console.log('Create project', this.projectForm.value); // Test.
+  }
+
   ngOnInit() {
     this.projectForm.get('format')?.patchValue(this.projectFormat[0]);
     this.changeFormat({ originalEvent: null, value: this.projectFormat[0] });
