@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 
 @Component({
@@ -7,6 +7,7 @@ import { FormGroup, FormControl } from '@angular/forms';
   styleUrls: ['./new-project-screen.component.scss'],
 })
 export class NewProjectScreenComponent implements OnInit {
+  @Output() backEvent = new EventEmitter();
   projectForm = new FormGroup({
     name: new FormControl(''),
     location: new FormControl(''),

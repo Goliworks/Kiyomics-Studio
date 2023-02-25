@@ -9,4 +9,8 @@ export class ProjectScreenComponent {
   display = true;
   screens = ['firstScreen', 'SecondScreen'];
   page = 1;
+
+  backEvent() {
+    this.page = 0;
+  }
 }
