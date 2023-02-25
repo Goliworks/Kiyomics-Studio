@@ -20,6 +20,12 @@ form {
 
 span.project-field {
   width: 65%;
+  .format-buttons{
+    display: flex;
+    justify-content: space-between;
+    padding-top: 15px;
+    border-top: 1px solid var(--gray-700);;
+  }
 }
 
 input {
@@ -47,11 +53,15 @@ input {
 label {
   color: var(--gray-300);
   font-size: 14px;
-}
-
-label:not(.size-fields) {
   display: block;
   margin-bottom: 8px;
+}
+
+.field-checkbox {
+  label {
+    display: inline;
+    padding-left: 8px;
+  }
 }
 
 p-dropdown {

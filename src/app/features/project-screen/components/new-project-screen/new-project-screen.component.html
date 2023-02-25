@@ -18,13 +18,17 @@
 
   <span class="project-field">
     <label>Format</label>
-    <p-dropdown
-      [options]="projectFormat"
-      placeholder="Select a format"
-      optionLabel="name"
-      [style]="{ width: '100%' }"
-      (onChange)="changeFormat($event)"
-      formControlName="format"></p-dropdown>
+    <div class="format-buttons">
+      <div *ngFor="let format of projectFormat" class="field-checkbox">
+        <p-radioButton
+          [inputId]="format.key"
+          name="format"
+          [value]="format"
+          (onClick)="changeFormat($event)"
+          formControlName="format"></p-radioButton>
+        <label [for]="format.key">{{ format.name }}</label>
+      </div>
+    </div>
   </span>
 
   <div class="size-fields">
