@@ -1,5 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
+import { invoke } from '@tauri-apps/api/tauri';
+import { TreeNode } from 'primeng/api';
 
 @Component({
   selector: 'app-new-project-screen',
@@ -35,9 +37,16 @@ export class NewProjectScreenComponent implements OnInit {
     console.log('Create project', this.projectForm.value); // Test.
   }
 
+  private getDocumentsPath() {
+    invoke('get_documents_path').then(path => {
+      this.projectForm.get('location')?.patchValue(<string>path);
+    });
+  }
+
   ngOnInit() {
     this.projectForm.get('format')?.patchValue(this.projectFormat[0]);
     this.changeFormat({ originalEvent: null, value: this.projectFormat[0] });
+    this.getDocumentsPath();
   }
 }
 
