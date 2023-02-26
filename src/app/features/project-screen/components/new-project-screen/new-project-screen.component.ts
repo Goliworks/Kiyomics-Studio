@@ -1,5 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { invoke } from '@tauri-apps/api/tauri';
 import { TreeNode } from 'primeng/api';
 
@@ -11,11 +11,11 @@ import { TreeNode } from 'primeng/api';
 export class NewProjectScreenComponent implements OnInit {
   @Output() backEvent = new EventEmitter();
   projectForm = new FormGroup({
-    name: new FormControl(''),
-    location: new FormControl(''),
+    name: new FormControl('', [Validators.required]),
+    location: new FormControl('', [Validators.required]),
     format: new FormControl({}),
-    width: new FormControl(),
-    height: new FormControl(),
+    width: new FormControl(0, [Validators.required, Validators.min(1)]),
+    height: new FormControl(0, [Validators.required, Validators.min(1)]),
   });
 
   projectFormat: ProjectFormat[] = [

@@ -56,6 +56,10 @@
       (click)="backEvent.emit()"
       class="p-button-outlined p-button-secondary"></button>
 
-    <button pButton type="submit" label="Create project"></button>
+    <button
+      pButton
+      type="submit"
+      label="Create project"
+      [disabled]="!projectForm.valid"></button>
   </div>
 </form>
