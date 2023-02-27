@@ -1,7 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { invoke } from '@tauri-apps/api/tauri';
-import { TreeNode } from 'primeng/api';
+import { open } from '@tauri-apps/api/dialog';
 
 @Component({
   selector: 'app-new-project-screen',
@@ -35,6 +35,18 @@ export class NewProjectScreenComponent implements OnInit {
 
   createProject() {
     console.log('Create project', this.projectForm.value); // Test.
+  }
+
+  // Select a path.
+  openOSFileExplorer() {
+    // Call tauri API to open the OS file explorer to select a folder.
+    open({
+      directory: true,
+    }).then(e => {
+      if (e) {
+        this.projectForm.get('location')?.patchValue(<string>e);
+      }
+    });
   }
 
   private getDocumentsPath() {
